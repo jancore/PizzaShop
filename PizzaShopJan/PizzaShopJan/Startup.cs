@@ -15,4 +15,5 @@ namespace PizzaShopJan
             ConfigureAuth(app);
         }
     }
+    //random comment
 }
