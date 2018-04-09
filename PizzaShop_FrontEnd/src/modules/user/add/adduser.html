@@ -1,0 +1,27 @@
+<md-content class="md-padding" layout="column" layout-wrap layout-padding>
+    <form name="userForm" ng-submit="$ctrl.saveUser()">
+        <div layout="column">
+            <md-input-container class="md-block">
+                <label>Correo electrónico</label>
+                <input required type="string" name="email" ng-model="$ctrl.user.email" />
+                <div ng-messages="userForm.email.$error" md-auto-hide="false">
+                    <div ng-message="required">
+                        Es necesario introducir un correo electrónico válido.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Contraseña</label>
+                <input required type="password" name="password" ng-model="$ctrl.user.password" />
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Repetir contraseña</label>
+                <input required type="password" name="passwordAgain" ng-model="$ctrl.user.passwordAgain" />
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Nombre de usuario</label>
+                <input required type="string" name="userName" ng-model="$ctrl.user.userName" />
+            </md-input-container>
+            <md-button class="md-primary" type="submit">Confirmar registro</md-button>
+    </form>
+</md-content>
