@@ -19,6 +19,8 @@ namespace PizzaShopJan
 
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
+            // Habilitar CORS
+            config.EnableCors();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
