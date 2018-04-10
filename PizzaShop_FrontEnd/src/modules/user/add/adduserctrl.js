@@ -5,21 +5,18 @@ export class AddUserCtrl {
         this.userService = userService;
         this.state = state;
         this.user = {
+            userName: null,
             email: null,
             password: null,
-            passwordAgain: null,
-            userName: null
+            confirmPassword: null
         };
     }
     saveUser() {
         let self = this;
         this.userService.create(this.user)
             .then(function () {
-                $http({
-                    method: 'POST',
-                    url: 'http://localhost:51889',
-                    data: JSON.stringify(this.user)
-                });
+                
+                
             });
     }
 

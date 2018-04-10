@@ -24,6 +24,11 @@ export class UserService extends BaseService {
             super.getRoute(),
             user
         );
+        $http({
+            method: 'POST',
+            url: 'http://localhost:51889/api/Account/Register',
+            data: JSON.stringify(this.user)
+        });
 
         /*
         return this.http({

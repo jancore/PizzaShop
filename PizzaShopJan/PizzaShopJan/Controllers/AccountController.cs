@@ -22,7 +22,7 @@ namespace PizzaShopJan.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    [EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
