@@ -90348,13 +90348,55 @@ var AddUserCtrl = function () {
 AddUserCtrl.$inject = ['$state', 'userService'];
 App.controller('addUserCtrl', AddUserCtrl);
 
-var html$7 = "<md-content class=\"md-padding\" layout=\"column\" layout-wrap layout-padding>\r\n    <form name=\"userForm\" ng-submit=\"$ctrl.saveUser()\">\r\n        <div layout=\"column\">\r\n            <md-input-container class=\"md-block\">\r\n                <label>Nombre de usuario</label>\r\n                <input required type=\"string\" name=\"userName\" ng-model=\"$ctrl.user.userName\" />\r\n            </md-input-container>\r\n            <md-button class=\"md-primary\" type=\"submit\">Confirmar registro</md-button>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Correo electrónico</label>\r\n                <input required type=\"email\" name=\"email\" ng-model=\"$ctrl.user.email\" />\r\n                <div ng-messages=\"userForm.email.$error\" md-auto-hide=\"false\">\r\n                    <div ng-message=\"required\">\r\n                        Es necesario introducir un correo electrónico válido.\r\n                    </div>\r\n                </div>\r\n            </md-input-container>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Contraseña</label>\r\n                <input required type=\"password\" name=\"password\" ng-model=\"$ctrl.user.password\" minlength=\"5\" />\r\n                <div ng-messages=\"userForm.password.$error\" md-auto-hide=\"false\">\r\n                    <div ng-message=\"required\">\r\n                        La contraseña debe tener una longitud mínima de 5 caracteres.\r\n                    </div>\r\n                </div>\r\n            </md-input-container>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Repetir contraseña</label>\r\n                <input required type=\"password\" name=\"confirmPassword\" ng-model=\"$ctrl.user.confirmPassword\" />\r\n            </md-input-container>\r\n\r\n    </form>\r\n</md-content>";
+var html$7 = "<md-content class=\"md-padding\" layout=\"column\" layout-wrap layout-padding>\r\n    <form name=\"userForm\" ng-submit=\"$ctrl.saveUser()\">\r\n        <div layout=\"column\">\r\n            <md-input-container class=\"md-block\">\r\n                <label>Nombre de usuario</label>\r\n                <input required type=\"string\" name=\"userName\" ng-model=\"$ctrl.user.userName\" />\r\n            </md-input-container>\r\n            \r\n            <md-input-container class=\"md-block\">\r\n                <label>Correo electrónico</label>\r\n                <input required type=\"email\" name=\"email\" ng-model=\"$ctrl.user.email\" />\r\n                <div ng-messages=\"userForm.email.$error\" md-auto-hide=\"false\">\r\n                    <div ng-message=\"required\">\r\n                        Es necesario introducir un correo electrónico válido.\r\n                    </div>\r\n                </div>\r\n            </md-input-container>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Contraseña</label>\r\n                <input required type=\"password\" name=\"password\" ng-model=\"$ctrl.user.password\" minlength=\"5\" />\r\n                <div ng-messages=\"userForm.password.$error\" md-auto-hide=\"false\">\r\n                    <div ng-message=\"required\">\r\n                        La contraseña debe tener una longitud mínima de 8 caracteres, y contener mayúsculas, minúsculas, números y símbolos.\r\n                    </div>\r\n                </div>\r\n            </md-input-container>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Repetir contraseña</label>\r\n                <input required type=\"password\" name=\"confirmPassword\" ng-model=\"$ctrl.user.confirmPassword\" />\r\n            </md-input-container>\r\n            <md-button class=\"md-primary\" type=\"submit\">Confirmar registro</md-button>\r\n    </form>\r\n</md-content>";
 
 var ilAddUser = {
     controller: 'addUserCtrl',
     template: html$7
 };
 App.component('ilAddUser', ilAddUser);
+
+config$5.$inject = ["$stateProvider"];
+function config$5(stateProvider) {
+    stateProvider.state('login', {
+        parent: 'app',
+        url: 'users/login',
+        component: 'ilLogin'
+    });
+}
+App.config(config$5);
+
+var LoginCtrl = function () {
+    function LoginCtrl(state, loginService) {
+        classCallCheck(this, LoginCtrl);
+
+        this.loginService = loginService;
+        this.state = state;
+        this.user = {
+            userName: null,
+            password: null
+        };
+    }
+
+    createClass(LoginCtrl, [{
+        key: 'login',
+        value: function login() {
+            var self = this;
+            this.loginService.logger(this.user).then(function () {});
+        }
+    }]);
+    return LoginCtrl;
+}();
+LoginCtrl.$inject = ['$state', 'userService'];
+App.controller('loginCtrl', LoginCtrl);
+
+var html$8 = "<md-content class=\"md-padding\" layout=\"column\" layout-wrap layout-padding>\r\n    <form name=\"userForm\" ng-submit=\"$ctrl.login()\"> <!-- AQUI VA EL METODO DEL LOGIN -->\r\n        <div layout=\"column\">          \r\n            <md-input-container class=\"md-block\">\r\n                <label>Nombre de usuario</label>\r\n                <input required type=\"string\" name=\"userName\" ng-model=\"$ctrl.loginData.userName\" />\r\n            </md-input-container>\r\n            <md-input-container class=\"md-block\">\r\n                <label>Contraseña</label>\r\n                <input required type=\"password\" name=\"password\" ng-model=\"$ctrl.loginData.password\" minlength=\"5\" />\r\n                <div ng-messages=\"userForm.password.$error\" md-auto-hide=\"false\">\r\n                    <div ng-message=\"required\">\r\n                        La contraseña debe tener una longitud mínima de 8 caracteres, y contener mayúsculas, minúsculas, números y símbolos.\r\n                    </div>\r\n                </div>\r\n            </md-input-container>\r\n            <md-button class=\"md-primary\" type=\"submit\">Acceder</md-button>\r\n    </form>\r\n</md-content>";
+
+var ilLogin = {
+    controller: 'loginCtrl',
+    template: html$8
+};
+App.component('ilLogin', ilLogin);
 
 var UserService = function (_BaseService) {
     inherits(UserService, _BaseService);
@@ -90436,7 +90478,7 @@ var IngredientService = function (_BaseService) {
 IngredientService.$inject = ['$http', 'resolveUrl'];
 App.service('ingredientService', IngredientService);
 
-var html$8 = "<md-select ng-model=\"$ctrl.pizza.ingredients\" multiple>\r\n    <md-option ng-repeat=\"ingredient in $ctrl.ingredients\" ng-value=\"{{ingredient}}\">\r\n        {{ingredient.name}}\r\n    </md-option>\r\n</md-select>";
+var html$9 = "<md-select ng-model=\"$ctrl.pizza.ingredients\" multiple>\r\n    <md-option ng-repeat=\"ingredient in $ctrl.ingredients\" ng-value=\"{{ingredient}}\">\r\n        {{ingredient.name}}\r\n    </md-option>\r\n</md-select>";
 
 var IngredientSelectorCtrl = function () {
     function IngredientSelectorCtrl(ingredientService) {
@@ -90462,7 +90504,7 @@ IngredientSelectorCtrl.$inject = ['ingredientService'];
 App.controller('ingredientSelectorCtrl', IngredientSelectorCtrl);
 
 var ilIngredientSelector = {
-    template: html$8,
+    template: html$9,
     controller: 'ingredientSelectorCtrl',
     bindings: {
         pizza: "="
@@ -90489,19 +90531,19 @@ var CommentService = function (_BaseService) {
 CommentService.$inject = ['$http', 'resolveUrl'];
 App.service('commentService', CommentService);
 
-config$5.$inject = ["$stateProvider"];
-function config$5(stateProvider) {
+config$6.$inject = ["$stateProvider"];
+function config$6(stateProvider) {
     stateProvider.state('app', {
         url: '/',
         component: 'ilApp'
     });
 }
-App.config(config$5);
+App.config(config$6);
 
-var html$9 = "<md-sidenav md-component-id=\"sidenav\" class=\"md-sidenav-left\" md-component-id=\"left\" style=\"position:fixed\" md-is-locked-open=\"$mdMedia('gt-sm')\"\r\n  md-whiteframe=\"4\">\r\n  <md-toolbar class=\"md-theme-indigo\">\r\n    <h1 class=\"md-toolbar-tools\">La pizzería del Tito Jan</h1>\r\n  </md-toolbar>\r\n  <md-content layout=\"column\" layout-padding>\r\n    <md-button class=\"md-primary\" ui-sref=\"adduser\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Registro\r\n    </md-button>\r\n    <md-button class=\"md-primary\" ui-sref=\"pizzalist\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Carta de pizzas\r\n    </md-button>\r\n    <md-button class=\"md-primary\" ui-sref=\"addpizza\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Añadir pizza\r\n    </md-button>\r\n  </md-content>\r\n</md-sidenav>";
+var html$10 = "<md-sidenav md-component-id=\"sidenav\" class=\"md-sidenav-left\" md-component-id=\"left\" style=\"position:fixed\" md-is-locked-open=\"$mdMedia('gt-sm')\"\r\n  md-whiteframe=\"4\">\r\n  <md-toolbar class=\"md-theme-indigo\">\r\n    <h1 class=\"md-toolbar-tools\">La pizzería del Tito Jan</h1>\r\n  </md-toolbar>\r\n  <md-content layout=\"column\" layout-padding>\r\n    <md-button class=\"md-primary\" ui-sref=\"adduser\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Registro\r\n    </md-button>\r\n    <md-button class=\"md-primary\" ui-sref=\"login\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Acceso a usuarios\r\n    </md-button>\r\n    <md-button class=\"md-primary\" ui-sref=\"pizzalist\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Carta de pizzas\r\n    </md-button>\r\n    <md-button class=\"md-primary\" ui-sref=\"addpizza\" ng-click=\"$ctrl.closeSidenav()\">\r\n      Añadir pizza\r\n    </md-button>\r\n  </md-content>\r\n</md-sidenav>";
 
 var ilMenu = {
-  template: html$9,
+  template: html$10,
   bindings: {
     closeSidenav: "=",
     mdSidenav: "="
@@ -90509,10 +90551,10 @@ var ilMenu = {
 };
 App.component('ilMenu', ilMenu);
 
-var html$10 = "<md-toolbar layout-align=\"center center\" layout=\"row\" class=\"site-content-toolbar\" ng-show=\"$ctrl.isSidenavClosed()\">\r\n    <img src=\"img/menu.png\" class=\"md-icon-button md-button\" ng-click=\"$ctrl.openSidenav()\"></img>\r\n    <h1 class=\"md-toolbar-tools\">Pizza Shop</h1>\r\n</md-toolbar>";
+var html$11 = "<md-toolbar layout-align=\"center center\" layout=\"row\" class=\"site-content-toolbar\" ng-show=\"$ctrl.isSidenavClosed()\">\r\n    <img src=\"img/menu.png\" class=\"md-icon-button md-button\" ng-click=\"$ctrl.openSidenav()\"></img>\r\n    <h1 class=\"md-toolbar-tools\">Pizza Shop</h1>\r\n</md-toolbar>";
 
 var ilToolBar = {
-    template: html$10,
+    template: html$11,
     bindings: {
         isSidenavClosed: "=",
         openSidenav: "=",
@@ -90521,10 +90563,10 @@ var ilToolBar = {
 };
 App.component('ilToolBar', ilToolBar);
 
-var html$11 = "<md-content flex layout-padding>\r\n  <div ui-view flex></div>\r\n</md-content>";
+var html$12 = "<md-content flex layout-padding>\r\n  <div ui-view flex></div>\r\n</md-content>";
 
 var ilContent = {
-  template: html$11
+  template: html$12
 };
 App.component('ilContent', ilContent);
 
@@ -90556,10 +90598,10 @@ var AppCtrl = function () {
 AppCtrl.$inject = ['$mdSidenav'];
 App.controller('appCtrl', AppCtrl);
 
-var html$12 = "<div layout=\"column\" ng-cloak>\r\n    <section layout=\"row\" flex>\r\n        <il-menu close-sidenav=\"$ctrl.closeSidenav\" md-sidenav=\"$ctrl.mdSidenav\"></il-menu>\r\n        <div layout=\"column\" flex>\r\n            <il-tool-bar layout-align=\"center center\" layout=\"row\" class=\"site-content-toolbar\" is-sidenav-closed=\"$ctrl.isSidenavClosed\"\r\n                open-sidenav=\"$ctrl.openSidenav\" md-sidenav=\"$ctrl.mdSidenav\">\r\n            </il-tool-bar>\r\n            <il-content flex layout-padding class=\"content\"></il-content>\r\n        </div>\r\n    </section>\r\n</div>";
+var html$13 = "<div layout=\"column\" ng-cloak>\r\n    <section layout=\"row\" flex>\r\n        <il-menu close-sidenav=\"$ctrl.closeSidenav\" md-sidenav=\"$ctrl.mdSidenav\"></il-menu>\r\n        <div layout=\"column\" flex>\r\n            <il-tool-bar layout-align=\"center center\" layout=\"row\" class=\"site-content-toolbar\" is-sidenav-closed=\"$ctrl.isSidenavClosed\"\r\n                open-sidenav=\"$ctrl.openSidenav\" md-sidenav=\"$ctrl.mdSidenav\">\r\n            </il-tool-bar>\r\n            <il-content flex layout-padding class=\"content\"></il-content>\r\n        </div>\r\n    </section>\r\n</div>";
 
 var ilApp = {
-    template: html$12,
+    template: html$13,
     controller: 'appCtrl'
 };
 
@@ -90576,6 +90618,7 @@ exports.ilPizzaDetails = ilPizzaDetails;
 exports.ilAddPizza = ilAddPizza;
 exports.PizzaService = PizzaService;
 exports.ilAddUser = ilAddUser;
+exports.ilLogin = ilLogin;
 exports.UserService = UserService;
 exports.IngredientService = IngredientService;
 exports.ilIngredientSelector = ilIngredientSelector;
