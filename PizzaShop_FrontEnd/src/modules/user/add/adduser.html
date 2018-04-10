@@ -3,7 +3,7 @@
         <div layout="column">
             <md-input-container class="md-block">
                 <label>Correo electrónico</label>
-                <input required type="string" name="email" ng-model="$ctrl.user.email" />
+                <input required type="email" name="email" ng-model="$ctrl.user.email" />
                 <div ng-messages="userForm.email.$error" md-auto-hide="false">
                     <div ng-message="required">
                         Es necesario introducir un correo electrónico válido.
@@ -12,7 +12,12 @@
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Contraseña</label>
-                <input required type="password" name="password" ng-model="$ctrl.user.password" />
+                <input required type="password" name="password" ng-model="$ctrl.user.password" minlength="5" />
+                <div ng-messages="userForm.password.$error" md-auto-hide="false">
+                    <div ng-message="required">
+                        La contraseña debe tener una longitud mínima de 5 caracteres.
+                    </div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Repetir contraseña</label>

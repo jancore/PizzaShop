@@ -12,13 +12,17 @@ export class AddUserCtrl {
         };
     }
     saveUser() {
-        let self=this;
+        let self = this;
         this.userService.create(this.user)
-            .then(function(){
-                self.state.go('userlist')
+            .then(function () {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:51889',
+                    data: JSON.stringify(this.user)
+                });
             });
     }
-    
+
 }
 AddUserCtrl.$inject = ['$state', 'userService'];
 App.controller('addUserCtrl', AddUserCtrl);

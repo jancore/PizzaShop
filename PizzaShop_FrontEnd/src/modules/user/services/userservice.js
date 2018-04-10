@@ -3,7 +3,7 @@ import { BaseService } from '../../baseservice';
 
 export class UserService extends BaseService {
     constructor(http, resolveUrl) {
-        super(http, resolveUrl, 'users');
+        super(http, resolveUrl, 'api/Account/Register');
     }
 
     get(id) {

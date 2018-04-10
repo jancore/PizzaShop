@@ -85,31 +85,7 @@
         }
       ],
       "comments": []
-    },
-    {
-      "name": "Jananera",
-      "ingredients": [
-        {
-          "id": 2,
-          "name": "corn",
-          "prize": 2
-        }
-      ],
-      "img": null,
-      "id": 5
-    },
-    {
-      "name": "Jananera",
-      "ingredients": [
-        {
-          "id": 2,
-          "name": "corn",
-          "prize": 2
-        }
-      ],
-      "img": null,
-      "id": 6
-    }
+    }    
   ],
   "ingredients": [
     {
