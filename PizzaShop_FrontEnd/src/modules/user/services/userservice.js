@@ -18,20 +18,17 @@ export class UserService extends BaseService {
         return this.http.post(
             super.getRouteLogin(),
             data,
-            {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
-        );
-        /*
-        .success(function (response) {
-
-            localStorageService.set('authorizationData', { token: response.access_token, userName: user.userName });
-            _authentication.isAuth = true;
-            _authentication.userName = user.userName;
-        }).error(function (err, status) {
-            //throw 
-        });
-        */
+            { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+        )
+            .success(function (response) {
+                localStorageService.set('authorizationData', { token: response.access_token, userName: user.userName });
+                _authentication.isAuth = true;
+                _authentication.userName = user.userName;
+            }).error(function (err, status) {
+                //throw
+            });
     }
-    
 }
+
 UserService.$inject = ['$http', 'resolveUrl'];
 App.service('userService', UserService);

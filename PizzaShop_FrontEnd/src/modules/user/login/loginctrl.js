@@ -13,10 +13,9 @@ export class LoginCtrl {
     login() {
         let self = this;
         this.userService.logger(this.user)
-            .then(function () {    
+            .then(function () {
             });
     }
-
 }
 LoginCtrl.$inject = ['$state', 'userService'];
 App.controller('loginCtrl', LoginCtrl);
