@@ -7,17 +7,16 @@ export class LoginCtrl {
         this.user = {
             userName: null,
             password: null,
+            grant_type: "password",
         };
     }
     login() {
         let self = this;
         this.loginService.logger(this.user)
-            .then(function () {
-                
-                
+            .then(function () {    
             });
     }
 
 }
-LoginCtrl.$inject = ['$state', 'userService'];
+LoginCtrl.$inject = ['$state', 'loginService'];
 App.controller('loginCtrl', LoginCtrl);

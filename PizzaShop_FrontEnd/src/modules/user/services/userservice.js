@@ -24,33 +24,11 @@ export class UserService extends BaseService {
             super.getRoute(),
             user
         );
+        /* 
         $http({
             method: 'POST',
             url: 'http://localhost:51889/api/Account/Register',
             data: JSON.stringify(this.user)
-        });
-
-        /*
-        return this.http({
-            method: 'POST',
-            // set content-type to undefined so it is automatically selected
-            headers: { 'Content-Type': undefined },
-            url: super.getRoute(),
-            data: {
-                name: user.name,
-                ingredients: user.ingredients,
-                image: user.img,
-            },
-            transformRequest: function (data, headersGetter) {
-                let formData = new FormData();
-                angular.forEach(data, function (value, key) {
-                    if (key === 'image' && value) {
-                        formData.append(key, value, value.name);
-                    }
-                    else formData.append(key, value);
-                });
-                return formData;
-            }
         });
         */
     }
