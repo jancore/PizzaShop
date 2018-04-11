@@ -1,8 +1,8 @@
 import { App } from '../../module';
 
 export class LoginCtrl {
-    constructor(state, loginService) {
-        this.loginService = loginService;
+    constructor(state, userService) {
+        this.userService = userService;
         this.state = state;
         this.user = {
             userName: null,
@@ -12,11 +12,11 @@ export class LoginCtrl {
     }
     login() {
         let self = this;
-        this.loginService.logger(this.user)
+        this.userService.logger(this.user)
             .then(function () {    
             });
     }
 
 }
-LoginCtrl.$inject = ['$state', 'loginService'];
+LoginCtrl.$inject = ['$state', 'userService'];
 App.controller('loginCtrl', LoginCtrl);

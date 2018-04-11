@@ -3,32 +3,31 @@ import { BaseService } from '../../baseservice';
 
 export class UserService extends BaseService {
     constructor(http, resolveUrl) {
-        super(http, resolveUrl, 'api/Account/Register');
+        super(http, resolveUrl, 'api/Account/Register', 'Token');
     }
 
-    get(id) {
-        return this.http.get(
-            super.getRouteById(id)
-        );
-    }
-    getAll() {
-        return this.http.get(
-            super.getRoute()
-        );
-    }
     create(user) {
-        // in the development database (json-server)
-        // we do not store the images
-        if(user.img) delete user.img;
         return this.http.post(
-            super.getRoute(),
+            super.getRouteAddUser(),
             user
         );
-        /* 
-        $http({
-            method: 'POST',
-            url: 'http://localhost:51889/api/Account/Register',
-            data: JSON.stringify(this.user)
+    }
+
+    logger(user) {
+        var data = "grant_type=password&username=" + user.userName + "&password=" + user.password;
+        return this.http.post(
+            super.getRouteLogin(),
+            data,
+            {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
+        );
+        /*
+        .success(function (response) {
+
+            localStorageService.set('authorizationData', { token: response.access_token, userName: user.userName });
+            _authentication.isAuth = true;
+            _authentication.userName = user.userName;
+        }).error(function (err, status) {
+            //throw 
         });
         */
     }

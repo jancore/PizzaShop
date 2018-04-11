@@ -14,7 +14,6 @@ using System.Web.Http.Cors;
 
 namespace PizzaShopJan
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
