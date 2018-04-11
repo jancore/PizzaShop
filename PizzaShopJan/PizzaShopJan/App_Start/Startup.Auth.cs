@@ -10,9 +10,11 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using PizzaShopJan.Providers;
 using PizzaShopJan.Models;
+using System.Web.Http.Cors;
 
 namespace PizzaShopJan
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }

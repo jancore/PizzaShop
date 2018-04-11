@@ -1,0 +1,19 @@
+<md-content class="md-padding" layout="column" layout-wrap layout-padding>
+    <form name="userForm" ng-submit="$ctrl.login()">
+        <div layout="column">          
+            <md-input-container class="md-block">
+                <label>Nombre de usuario</label>
+                <input required type="string" name="userName" ng-model="$ctrl.user.userName" />
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Contraseña</label>
+                <input required type="password" name="password" ng-model="$ctrl.user.password" minlength="5" />
+                <div ng-messages="userForm.password.$error" md-auto-hide="false">
+                    <div ng-message="required">
+                        La contraseña debe tener una longitud mínima de 8 caracteres, y contener mayúsculas, minúsculas, números y símbolos.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-button class="md-primary" type="submit">Acceder</md-button>
+    </form>
+</md-content>
