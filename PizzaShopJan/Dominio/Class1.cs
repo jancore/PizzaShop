@@ -81,7 +81,7 @@ namespace Dominio
 
         public DbSet IDbSet(Type type)
         {
-            return this.IDbSet(type);
+            return this.Set(type);
         }
     }
 
