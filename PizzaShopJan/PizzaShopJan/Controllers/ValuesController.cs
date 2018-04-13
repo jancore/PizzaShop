@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Dominio;
+using PizzaShopJan.Models;
 
 namespace PizzaShopJan.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class ValuesController : ApiController
     {
         readonly ILogger _logger;
@@ -22,20 +24,41 @@ namespace PizzaShopJan.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [Route("addpizza")]
+        public async Task<IHttpActionResult> AddPizza(PizzasBindingModel model)
         {
-            var pizza = new Pizza() { Id = Guid.NewGuid(), Name = "Carbonara"};
-            pizza.Comments.Add(new Comment() { Id = Guid.NewGuid(), Name = "De puta madre.", UserName = "Pedro" });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var pizza = new Pizza() { Id = Guid.NewGuid(), Name = model.Name };
             _logger.Write(pizza);
+
+            return Ok();
+        }
+        
+
+        // GET api/values/5
+        public string Get(PizzasBindingModel model)
+        {
+           // var pizza = new Pizza() { Id = Guid.NewGuid(), Name = model.Name};
+           // _logger.Write(pizza);
 
             return "value";
         }
+
+        /* // POST api/values
+         public void Post([FromBody]CreatePizza createPizza)
+         {
+             _logger.Write(createPizza);
+         }*/
 
         // POST api/values
         public void Post([FromBody]string value)
         {
         }
+
 
         // PUT api/values/5
         public void Put(int id, [FromBody]string value)

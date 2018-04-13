@@ -4,6 +4,11 @@ using System.Data.Entity;
 
 namespace Dominio
 {
+    public class CreatePizza
+    {
+        public string Name { get; set; }
+    }
+
     public class Pizza
     {
         public Pizza()
@@ -54,6 +59,12 @@ namespace Dominio
 
         public void Write(Pizza pizza)
         {
+            /*var pizza = new Pizza()
+            {
+                Id = Guid.NewGuid(),
+                Name = createPizza.Name
+            };*/
+
             _repository.Write(pizza);
             _unitOfWork.SaveChanges();
         }
