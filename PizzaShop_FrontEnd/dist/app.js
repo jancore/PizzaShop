@@ -91026,6 +91026,7 @@ var UserService = function (_BaseService) {
     }]);
     return UserService;
 }(BaseService);
+
 UserService.$inject = ['$http', 'resolveUrl'];
 App.service('userService', UserService);
 

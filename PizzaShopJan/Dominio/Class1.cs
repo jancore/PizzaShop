@@ -71,7 +71,7 @@ namespace Dominio
 
     public class PizzaShowContext : DbContext, IUnitOfWork, IRepositoryPizza
     {
-        public PizzaShowContext()
+        public PizzaShowContext() : base("PizzasEntities")
         {
 
         }
