@@ -17,16 +17,17 @@
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Contraseña</label>
-                <input required type="password" name="password" ng-model="$ctrl.user.password" minlength="5" />
+                <input required type="password" name="password" ng-model="$ctrl.user.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener mayúsculas, minúsculas, letras y símbolos, además de tener una longitud mínima de 8 caracteres" />
                 <div ng-messages="userForm.password.$error" md-auto-hide="false">
                     <div ng-message="required">
-                        La contraseña debe tener una longitud mínima de 8 caracteres, y contener mayúsculas, minúsculas, números y símbolos.
+                        Es necesario introducir un correo electrónico válido.
                     </div>
                 </div>
             </md-input-container>
+            
             <md-input-container class="md-block">
                 <label>Repetir contraseña</label>
-                <input required type="password" name="confirmPassword" ng-model="$ctrl.user.confirmPassword" />
+                <input required type="password" name="confirmPassword" ng-model="$ctrl.user.confirmPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener mayúsculas, minúsculas, letras y símbolos, además de tener una longitud mínima de 8 caracteres" />
             </md-input-container>
             <md-button class="md-primary" type="submit">Confirmar registro</md-button>
     </form>
