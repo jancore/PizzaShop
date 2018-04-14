@@ -24,41 +24,17 @@ namespace PizzaShopJan.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        [Route("addpizza")]
-        public async Task<IHttpActionResult> AddPizza(PizzasBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var pizza = new Pizza() { Id = Guid.NewGuid(), Name = model.Name };
-            _logger.Write(pizza);
-
-            return Ok();
-        }
-        
-
         // GET api/values/5
-        public string Get(PizzasBindingModel model)
+        public string Get(int id)
         {
-           // var pizza = new Pizza() { Id = Guid.NewGuid(), Name = model.Name};
-           // _logger.Write(pizza);
-
             return "value";
         }
 
-        /* // POST api/values
-         public void Post([FromBody]CreatePizza createPizza)
+        // POST api/values
+        public void Post([FromBody]CreatePizza createPizza)
          {
              _logger.Write(createPizza);
-         }*/
-
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
+         }
 
         // PUT api/values/5
         public void Put(int id, [FromBody]string value)

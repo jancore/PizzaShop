@@ -39,7 +39,7 @@ namespace Dominio
 
     public interface ILogger : IDisposable
     {
-        void Write(Pizza pizza);
+        void Write(CreatePizza createPizza);
     }
 
     public class Logger : ILogger
@@ -57,13 +57,13 @@ namespace Dominio
             _unitOfWork.Dispose();
         }
 
-        public void Write(Pizza pizza)
+        public void Write(CreatePizza createPizza)
         {
-            /*var pizza = new Pizza()
+            var pizza = new Pizza()
             {
                 Id = Guid.NewGuid(),
                 Name = createPizza.Name
-            };*/
+            };
 
             _repository.Write(pizza);
             _unitOfWork.SaveChanges();
@@ -82,7 +82,7 @@ namespace Dominio
 
     public class PizzaShowContext : DbContext, IUnitOfWork, IRepositoryPizza
     {
-        public PizzaShowContext() : base("PizzasEntities")
+        public PizzaShowContext()
         {
 
         }
