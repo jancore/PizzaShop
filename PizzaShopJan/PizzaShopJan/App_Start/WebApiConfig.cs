@@ -41,6 +41,7 @@ namespace PizzaShopJan
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<Logger>().As<ILogger>().InstancePerRequest();
+            builder.RegisterType<Updater>().As<IUpdater>().InstancePerRequest();
             builder.RegisterType<Repository>().As<IRepository>().InstancePerRequest();
             builder.RegisterType<PizzaShowContext>().As<IRepositoryPizza>().As<IUnitOfWork>().InstancePerRequest();
 

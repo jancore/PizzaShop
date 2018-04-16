@@ -14,9 +14,11 @@ namespace PizzaShopJan.Controllers
     public class ValuesController : ApiController
     {
         readonly ILogger _logger;
-        public ValuesController(ILogger logger)
+        readonly IUpdater _updater;
+        public ValuesController(ILogger logger, IUpdater updater)
         {
             _logger = logger;
+            _updater = updater;
         }
         // GET api/values
         public IEnumerable<string> Get()
@@ -37,8 +39,9 @@ namespace PizzaShopJan.Controllers
          }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]CreatePizza createPizza)
         {
+            _updater.Modify(createPizza);
         }
 
         // DELETE api/values/5
