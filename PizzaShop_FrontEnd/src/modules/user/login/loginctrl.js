@@ -16,6 +16,14 @@ export class LoginCtrl {
             .then(function () {
             });
     }
+
+    logOut(){
+        this.user={
+            userName:null,
+            password:null,
+        };
+        this.userService.clearLog();
+    }
 }
 LoginCtrl.$inject = ['$state', 'userService'];
 App.controller('loginCtrl', LoginCtrl);
