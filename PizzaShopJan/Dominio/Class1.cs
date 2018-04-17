@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Data.Entity;
 
 namespace Dominio
 {
     public class CreatePizza
     {
-        public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        public Guid IdIngredient { get; set; }
-        public bool Remove { get; set; }
+
+        [Required]
+        public List<Guid> Ingredients { get; set; }
+
+        [Required]
+        public HttpPostedFileBase File { get; set; }
     }
 
     public class Pizza

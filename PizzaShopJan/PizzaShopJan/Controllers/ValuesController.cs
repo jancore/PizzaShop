@@ -33,10 +33,15 @@ namespace PizzaShopJan.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]CreatePizza createPizza)
-         {
-             _logger.Write(createPizza);
-         }
+        /*public void Post([FromBody]CreatePizza createPizza)
+        {
+            _logger.Write(createPizza);
+        }*/
+
+        public void Post(UploadRequestViewModel model)
+        {
+            _logger.Write(model);
+        }
 
         // PUT api/values/5
         public void Put([FromBody]CreatePizza createPizza)

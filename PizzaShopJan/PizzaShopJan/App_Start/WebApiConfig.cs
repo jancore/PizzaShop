@@ -9,6 +9,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using System.Reflection;
 using Dominio;
+using PizzaShopJan.Formatters;
 
 namespace PizzaShopJan
 {
@@ -48,6 +49,8 @@ namespace PizzaShopJan
             // Set the dependency resolver to be Autofac
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            config.Formatters.Add(new FormMultipartEncodedMediaTypeFormatter());
         }
     }
 }
