@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,17 +9,16 @@ using System.Web.Http;
 using Dominio;
 using PizzaShopJan.Models;
 
+
 namespace PizzaShopJan.Controllers
 {
     [AllowAnonymous]
     public class ValuesController : ApiController
     {
         readonly ILogger _logger;
-        readonly IUpdater _updater;
-        public ValuesController(ILogger logger, IUpdater updater)
+        public ValuesController(ILogger logger)
         {
             _logger = logger;
-            _updater = updater;
         }
         // GET api/values
         public IEnumerable<string> Get()
@@ -32,26 +32,34 @@ namespace PizzaShopJan.Controllers
             return "value";
         }
 
-        // POST api/values
-        /*public void Post([FromBody]CreatePizza createPizza)
+        // POST api/values        
+        public void Post([FromBody]UploadRequestViewModel model)
         {
+            MemoryStream file = new MemoryStream();
+            CopyStream(model.File.InputStream, file);
+            var createPizza = new CreatePizza() { Name = model.Name, Ingredients = model.Ingredients, File = file.ToArray() };
             _logger.Write(createPizza);
-        }*/
-
-        public void Post(UploadRequestViewModel model)
-        {
-            _logger.Write(model);
         }
 
         // PUT api/values/5
         public void Put([FromBody]CreatePizza createPizza)
         {
-            _updater.Modify(createPizza);
+            //_updater.Modify(createPizza);
         }
 
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        public static void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, read);
+            }
         }
 
         protected override void Dispose(bool disposing)

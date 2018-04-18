@@ -15,7 +15,9 @@ namespace Dominio
         public List<Guid> Ingredients { get; set; }
 
         [Required]
-        public HttpPostedFileBase File { get; set; }
+        public Byte[] File { get; set; }
+
+        public Guid Id { get; set; }
     }
 
     public class Pizza
@@ -27,8 +29,9 @@ namespace Dominio
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public Byte[] File { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
-        public virtual ICollection<Comment> Comments {get; set;} 
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 
     public class Comment
@@ -100,62 +103,21 @@ namespace Dominio
 
         public void Write(CreatePizza createPizza)
         {
+            List<Ingredient> ingredients = new List<Ingredient>();
+            foreach(var IdIngredient in createPizza.Ingredients)
+            {
+                ingredients.Add(_repository.Find(IdIngredient));
+            }
             var pizza = new Pizza()
             {
                 Id = Guid.NewGuid(),
-                Name = createPizza.Name
+                Name = createPizza.Name,
+                Ingredients = ingredients,
+                File = createPizza.File
             };
 
             _repository.Write(pizza);
             _unitOfWork.SaveChanges();
-        }
-    }
-
-    public interface IUpdater : IDisposable
-    {
-        void Modify(CreatePizza createPizza);
-    }
-
-    public class Updater : IUpdater
-    {
-        readonly IRepository _repository;
-        readonly IUnitOfWork _unitOfWork;
-        public Updater(IRepository repository, IUnitOfWork unitOfWork)
-        {
-            _repository = repository;
-            _unitOfWork = unitOfWork;
-        }
-
-        public void Dispose()
-        {
-            _unitOfWork.Dispose();
-        }
-
-        public void Modify(CreatePizza createPizza)
-        {
-            using (var context = new PizzaShowContext())
-            {
-                var pizza = context.Pizza.Find(createPizza.Id);                
-                if(pizza != null)
-                {
-                    Ingredient ingredient;
-                    //foreach(var i in createPizza.IdIngredient)
-                    //{
-                        ingredient = context.Ingredient.Find(createPizza.IdIngredient);
-                        if (createPizza.Remove)
-                        {
-                            pizza.Ingredients.Remove(ingredient);
-                        }
-                        else
-                        {
-                            pizza.Ingredients.Add(ingredient);
-                        }
-                    //}
-                    _unitOfWork.SaveChanges();    
-                    //var comment = new Comment() { Id = Guid.NewGuid(), Name = "Acho, que pizza más rica.", UserName = "Antonio" };
-                    //pizza.Comments.Add(comment);                    
-                }                
-            }
         }
     }
 
@@ -182,11 +144,11 @@ namespace Dominio
             {
                 return base.SaveChanges();
             }
-            catch(NotSupportedException e)
+            catch (NotSupportedException e)
             {
                 throw e;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -204,6 +166,7 @@ namespace Dominio
     public interface IRepository
     {
         void Write(Pizza pizza);
+        Ingredient Find(Guid IdIngrediente);
     }
 
     public class Repository : IRepository
@@ -218,6 +181,13 @@ namespace Dominio
         {
             var set = _repositoryPizza.IDbSet(typeof(Pizza));
             set.Add(pizza);
+        }
+
+        public Ingredient Find(Guid IdIngrediente)
+        {
+            var set = _repositoryPizza.IDbSet(typeof(Ingredient));
+            var ingrediente = (Ingredient) set.Find(IdIngrediente);
+            return ingrediente;
         }
     }
 }

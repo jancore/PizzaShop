@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaShopJan", "PizzaShopJan\PizzaShopJan.csproj", "{3DB1E368-81E8-4472-9D0A-3D97B13E9C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{A7CDE1DF-CAA5-4A16-BE55-CC8A6A51EC29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3DB1E368-81E8-4472-9D0A-3D97B13E9C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DB1E368-81E8-4472-9D0A-3D97B13E9C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DB1E368-81E8-4472-9D0A-3D97B13E9C3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7CDE1DF-CAA5-4A16-BE55-CC8A6A51EC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7CDE1DF-CAA5-4A16-BE55-CC8A6A51EC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7CDE1DF-CAA5-4A16-BE55-CC8A6A51EC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7CDE1DF-CAA5-4A16-BE55-CC8A6A51EC29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
