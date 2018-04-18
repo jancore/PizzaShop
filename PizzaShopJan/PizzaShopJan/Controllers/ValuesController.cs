@@ -21,9 +21,13 @@ namespace PizzaShopJan.Controllers
             _logger = logger;
         }
         // GET api/values
-        public IEnumerable<string> Get()
+        /*public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
+        }*/
+        public IEnumerable<Ingredient> Get()
+        {
+            return _logger.Ingredients();
         }
 
         // GET api/values/5

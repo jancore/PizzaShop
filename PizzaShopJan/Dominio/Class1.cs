@@ -84,6 +84,7 @@ namespace Dominio
     public interface ILogger : IDisposable
     {
         void Write(CreatePizza createPizza);
+        List<Ingredient> Ingredients();
     }
 
     public class Logger : ILogger
@@ -115,9 +116,13 @@ namespace Dominio
                 Ingredients = ingredients,
                 File = createPizza.File
             };
-
             _repository.Write(pizza);
             _unitOfWork.SaveChanges();
+        }
+
+        public List<Ingredient> Ingredients()
+        {
+            return _repository.GetIngredients();
         }
     }
 
@@ -167,6 +172,7 @@ namespace Dominio
     {
         void Write(Pizza pizza);
         Ingredient Find(Guid IdIngrediente);
+        List<Ingredient> GetIngredients();
     }
 
     public class Repository : IRepository
@@ -188,6 +194,17 @@ namespace Dominio
             var set = _repositoryPizza.IDbSet(typeof(Ingredient));
             var ingrediente = (Ingredient) set.Find(IdIngrediente);
             return ingrediente;
+        }
+
+        public List<Ingredient> GetIngredients()
+        {
+            List<Ingredient> ingredientes = new List<Ingredient>();
+            var set = _repositoryPizza.IDbSet(typeof(Ingredient));
+            foreach(var ingredient in set)
+            {
+                ingredientes.Add((Ingredient) ingredient);
+            }
+            return ingredientes;
         }
     }
 }
