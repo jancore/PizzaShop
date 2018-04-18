@@ -7,7 +7,7 @@ export class BaseService{
         this.addPath = addPath;
         this.loginPath = loginPath;
     }
-    getRouteAddUser(){
+    getRoute(){
         return this.resolveUrl.getRoute(this.addPath);
     }
     getRouteLogin(){

@@ -9,7 +9,7 @@ export class UserService extends BaseService {
 
     create(user) {
         return this.http.post(
-            super.getRouteAddUser(),
+            super.getRoute(),
             user
         );
     }

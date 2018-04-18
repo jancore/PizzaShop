@@ -3,7 +3,7 @@ import { BaseService } from '../../baseservice';
 
 export class PizzaService extends BaseService {
     constructor(http, resolveUrl) {
-        super(http, resolveUrl, 'pizzas');
+        super(http, resolveUrl, 'pizzas','');
     }
 
     get(id) {
@@ -19,13 +19,13 @@ export class PizzaService extends BaseService {
     create(pizza) {
         // in the development database (json-server)
         // we do not store the images
-        if(pizza.img) delete pizza.img;
+        /*if(pizza.img) delete pizza.img;
         return this.http.post(
             super.getRoute(),
             pizza
         );
-
-        /*
+        */
+        
         return this.http({
             method: 'POST',
             // set content-type to undefined so it is automatically selected
@@ -47,7 +47,7 @@ export class PizzaService extends BaseService {
                 return formData;
             }
         });
-        */
+        
     }
 }
 PizzaService.$inject = ['$http', 'resolveUrl'];
