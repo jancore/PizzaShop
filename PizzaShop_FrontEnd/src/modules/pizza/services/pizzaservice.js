@@ -3,7 +3,7 @@ import { BaseService } from '../../baseservice';
 
 export class PizzaService extends BaseService {
     constructor(http, resolveUrl) {
-        super(http, resolveUrl, 'pizzas','');
+        super(http, resolveUrl, 'api/values','');
     }
 
     get(id) {
