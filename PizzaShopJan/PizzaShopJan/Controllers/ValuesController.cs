@@ -59,7 +59,7 @@ namespace PizzaShopJan.Controllers
         // PUT api/values/5
         public void Put([FromBody]CreatePizza createPizza)
         {
-            //_updater.Modify(createPizza);
+
         }
 
         // DELETE api/values/5
