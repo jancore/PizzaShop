@@ -4,7 +4,7 @@ export class AddPizzaCtrl {
     constructor(state, pizzaService) {
         this.pizzaService = pizzaService;
         this.state = state;
-        //this.ingredients = null;
+        this.ingredients = null;
         this.pizza = {
             name: null,
             ingredients: [],

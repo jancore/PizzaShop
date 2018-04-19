@@ -90611,7 +90611,7 @@ var PizzalistCtrl = function () {
 PizzalistCtrl.$inject = ['pizzaService'];
 App.controller('pizzaListCtrl', PizzalistCtrl);
 
-var html = "<md-content class=\"md-padding\" layout=\"column\" layout-gt-sm=\"row\" layout-wrap>\r\n    <div flex-gt-sm=\"50\" flex-gt-md=\"33\" ng-repeat=\"pizza in $ctrl.pizzas\">\r\n        <md-card class=\"md-button pizza-card\" ui-sref=\"pizzas({id: pizza.id})\">\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class=\"md-seccondary\">{{pizza.name}}</span>\r\n                </md-card-title-text>\r\n            </md-card-title>\r\n            <img ng-src=\"{{pizza.img}}\" class=\"md-card-image\">\r\n        </md-card>\r\n</md-content>";
+var html = "<md-content class=\"md-padding\" layout=\"column\" layout-gt-sm=\"row\" layout-wrap>\r\n    <div flex-gt-sm=\"50\" flex-gt-md=\"33\" ng-repeat=\"pizza in $ctrl.pizzas\">\r\n        <md-card class=\"md-button pizza-card\" ui-sref=\"pizzas({id: pizza.id})\">\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class=\"md-seccondary\">{{pizza.Name}}</span>\r\n                </md-card-title-text>\r\n            </md-card-title>\r\n            <img ng-src=\"{{pizza.img}}\" class=\"md-card-image\">\r\n        </md-card>\r\n</md-content>";
 
 var ilPizzaList = {
     controller: 'pizzaListCtrl',
@@ -90781,7 +90781,7 @@ var AddPizzaCtrl = function () {
 
         this.pizzaService = pizzaService;
         this.state = state;
-        //this.ingredients = null;
+        this.ingredients = null;
         this.pizza = {
             name: null,
             ingredients: [],
@@ -90893,14 +90893,22 @@ var PizzaService = function (_BaseService) {
                 url: get(PizzaService.prototype.__proto__ || Object.getPrototypeOf(PizzaService.prototype), 'getRoute', this).call(this),
                 data: {
                     name: pizza.name,
-                    ingredients: pizza.ingredients.Id,
-                    image: pizza.img
+                    Ingredients: pizza.ingredients,
+                    File: pizza.img
                 },
                 transformRequest: function transformRequest(data, headersGetter) {
                     var formData = new FormData();
                     angular.forEach(data, function (value, key) {
-                        if (key === 'image' && value) {
+                        if (key === 'File' && value) {
                             formData.append(key, value, value.name);
+                        }
+                        if (key === "Ingredients") {
+                            var index = 0;
+                            angular.forEach(value, function (valor, keyingredient) {
+                                var ingredientsKey = key + '[' + index + ']';
+                                formData.append(ingredientsKey, valor.Id);
+                                index++;
+                            });
                         } else formData.append(key, value);
                     });
                     return formData;

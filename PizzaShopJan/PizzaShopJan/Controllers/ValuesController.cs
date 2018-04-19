@@ -31,9 +31,20 @@ namespace PizzaShopJan.Controllers
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public IEnumerable<Pizza> Get(int id)
         {
-            return "value";
+            List<UploadRequestViewModel> models = new List<UploadRequestViewModel>();
+            List<Guid> IdIngredients = new List<Guid>();
+            var pizzas = _logger.Pizzas();
+            foreach(var pizza in pizzas)
+            {
+                foreach(var ingredient in pizza.Ingredients)
+                {
+                    IdIngredients.Add(ingredient.Id);
+                }
+                //models.Add(new UploadRequestViewModel() { Name = pizza.Name, Ingredients = IdIngredients, File = new MemoryStream(pizza.File) });
+            }
+            return _logger.Pizzas();
         }
 
         // POST api/values        

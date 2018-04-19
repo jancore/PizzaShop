@@ -33,14 +33,22 @@ export class PizzaService extends BaseService {
             url: super.getRoute(),
             data: {
                 name: pizza.name,
-                ingredients: pizza.ingredients,
-                image: pizza.img,
+                Ingredients: pizza.ingredients,
+                File: pizza.img,
             },
             transformRequest: function (data, headersGetter) {
-                let formData = new FormData();
+                let formData = new FormData();                
                 angular.forEach(data, function (value, key) {
-                    if (key === 'image' && value) {
+                    if (key === 'File' && value) {
                         formData.append(key, value, value.name);
+                    }
+                    if(key === "Ingredients"){
+                        let index = 0;
+                        angular.forEach(value, function(valor, keyingredient){                            
+                            let ingredientsKey = key + '[' + index + ']'
+                            formData.append(ingredientsKey, valor.Id);
+                            index++;
+                        });
                     }
                     else formData.append(key, value);
                 });
