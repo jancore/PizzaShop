@@ -18,7 +18,7 @@ export class UserService extends BaseService {
         var self = this;
         var data = "grant_type=password&username=" + user.userName + "&password=" + user.password;
         return this.http.post(
-            super.getRouteLogin(),
+            super.getSecondRoute(),
             data,
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
         ).then(function (response) {

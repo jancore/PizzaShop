@@ -10,7 +10,7 @@ export class BaseService{
     getRoute(){
         return this.resolveUrl.getRoute(this.addPath);
     }
-    getRouteLogin(){
+    getSecondRoute(){
         return this.resolveUrl.getRoute(this.loginPath);
     }
     getRouteById(id){

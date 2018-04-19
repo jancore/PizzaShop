@@ -90843,8 +90843,8 @@ var BaseService = function () {
             return this.resolveUrl.getRoute(this.addPath);
         }
     }, {
-        key: 'getRouteLogin',
-        value: function getRouteLogin() {
+        key: 'getSecondRoute',
+        value: function getSecondRoute() {
             return this.resolveUrl.getRoute(this.loginPath);
         }
     }, {
@@ -90861,7 +90861,7 @@ var PizzaService = function (_BaseService) {
 
     function PizzaService(http, resolveUrl) {
         classCallCheck(this, PizzaService);
-        return possibleConstructorReturn(this, (PizzaService.__proto__ || Object.getPrototypeOf(PizzaService)).call(this, http, resolveUrl, 'api/values', ''));
+        return possibleConstructorReturn(this, (PizzaService.__proto__ || Object.getPrototypeOf(PizzaService)).call(this, http, resolveUrl, 'api/values', 'pizzas'));
     }
 
     createClass(PizzaService, [{
@@ -90872,7 +90872,7 @@ var PizzaService = function (_BaseService) {
     }, {
         key: 'getAll',
         value: function getAll() {
-            return this.http.get(get(PizzaService.prototype.__proto__ || Object.getPrototypeOf(PizzaService.prototype), 'getRoute', this).call(this));
+            return this.http.get(get(PizzaService.prototype.__proto__ || Object.getPrototypeOf(PizzaService.prototype), 'getSecondRoute', this).call(this));
         }
     }, {
         key: 'create',
@@ -91039,7 +91039,7 @@ var UserService = function (_BaseService) {
         value: function logger(user) {
             var self = this;
             var data = "grant_type=password&username=" + user.userName + "&password=" + user.password;
-            return this.http.post(get(UserService.prototype.__proto__ || Object.getPrototypeOf(UserService.prototype), 'getRouteLogin', this).call(this), data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+            return this.http.post(get(UserService.prototype.__proto__ || Object.getPrototypeOf(UserService.prototype), 'getSecondRoute', this).call(this), data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
                 self._localStorage.set('authorizationData', { token: response.data.access_token, userName: user.userName });
                 return response;
             }, function error(response) {
