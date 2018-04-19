@@ -21,26 +21,26 @@ namespace PizzaShopJan.Controllers
             _logger = logger;
         }
         // GET api/values
-        /*public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }*/
         public IEnumerable<Ingredient> Get()
         {
             return _logger.Ingredients();
         }
 
         // GET api/values/5
+        [Route("pizzas")]
         public IEnumerable<Pizza> Get(int id)
         {
             List<UploadRequestViewModel> models = new List<UploadRequestViewModel>();
             List<Guid> IdIngredients = new List<Guid>();
+            Decimal TotalCost;
             var pizzas = _logger.Pizzas();
             foreach(var pizza in pizzas)
             {
+                TotalCost = 0m;
                 foreach(var ingredient in pizza.Ingredients)
                 {
                     IdIngredients.Add(ingredient.Id);
+                    TotalCost += ingredient.Cost;
                 }
                 //models.Add(new UploadRequestViewModel() { Name = pizza.Name, Ingredients = IdIngredients, File = new MemoryStream(pizza.File) });
             }
