@@ -29,17 +29,26 @@ namespace PizzaShopJan.Controllers
 
         // GET api/values/5
         [Route("pizzas")]
-        public IEnumerable<Pizza> GetPizza()
+        public IEnumerable<object> GetPizza()
         {
+            List<object> pizzasDTO = new List<object>();
             var pizzas = _logger.Pizzas();
-            return _logger.Pizzas();
+            string url;
+            foreach(var pizza in pizzas)
+            {
+                var type = pizza.GetType();
+                var properties = type.GetProperties();
+                url = "pizzas/" + properties[0].GetValue(pizza).ToString(); 
+                pizzasDTO.Add(new { Name = properties[1].GetValue(pizza), Ingredients = properties[2].GetValue(pizza), URL = url});
+            }            
+            return pizzasDTO;
         }
 
-        [Route("pizzas/id")]
+        /*[Route("pizzas/id")]
         public IEnumerable<Pizza> GetPizza(int id)
         {
             return _logger.Pizzas();
-        }
+        }*/
 
         // POST api/values   
         [Route("pizzas/add")]

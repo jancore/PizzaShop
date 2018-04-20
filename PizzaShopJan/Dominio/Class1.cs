@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Data.Entity;
-
+using System.Linq;
 namespace Dominio
 {
     public class CreatePizza
@@ -22,6 +22,7 @@ namespace Dominio
 
     public class Pizza
     {
+        private const Decimal beneficio = 5m;
         public Pizza()
         {
             this.Ingredients = new HashSet<Ingredient>();
@@ -33,6 +34,14 @@ namespace Dominio
         public string MIMEType { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+        public Decimal TotalCost()
+        {
+            return Ingredients.Sum(x => x.Cost) + beneficio;
+        }
+        public List<String> GetIngredients()
+        {
+            return Ingredients.Select(x => x.Name).ToList();
+        }
     }
 
     public class Comment
@@ -148,7 +157,13 @@ namespace Dominio
     {
         public PizzaShowContext() : base("PizzasEntities")
         {
-
+            this.Pizza.Select(c => new
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Ingredients = c.Ingredients.Select(i => new { i.Id, i.Name }).ToList()
+            } 
+            ).ToList();
         }
 
         public override int SaveChanges()
@@ -196,6 +211,7 @@ namespace Dominio
         {
             var set = _repositoryPizza.IDbSet(typeof(Pizza));
             set.Add(pizza);
+            
         }
 
         public Ingredient Find(Guid IdIngrediente)
@@ -217,22 +233,17 @@ namespace Dominio
         }
 
         public List<object> GetPizzas()
-        {
+        {            
             List<object> pizzas = new List<object>();
             var set = _repositoryPizza.IDbSet(typeof(Pizza));
-            Decimal totalCost;
             foreach (Pizza pizza in set)
             {
-                totalCost = 5m;
-                foreach(var ingrediente in pizza.Ingredients)
-                {
-                    totalCost += ingrediente.Cost;
-                }
-                pizzas.Add(new { Name = pizza.Name,
-                                Ingredients = pizza.Ingredients,
+                pizzas.Add(new {Id = pizza.Id,
+                                Name = pizza.Name,
+                                Ingredients = pizza.GetIngredients(),
                                 File = pizza.File,
                                 MIME = pizza.MIMEType,
-                                TotalCost = totalCost});
+                                TotalCost = pizza.TotalCost()});
             }
             return pizzas;
         }
