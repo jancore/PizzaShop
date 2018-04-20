@@ -17,7 +17,7 @@ namespace Dominio
         [Required]
         public Byte[] File { get; set; }
 
-        public Guid Id { get; set; }
+        public string MIMEType { get; set; }
     }
 
     public class Pizza
@@ -30,6 +30,7 @@ namespace Dominio
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Byte[] File { get; set; }
+        public string MIMEType { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }
@@ -115,7 +116,8 @@ namespace Dominio
                 Id = Guid.NewGuid(),
                 Name = createPizza.Name,
                 Ingredients = ingredients,
-                File = createPizza.File
+                File = createPizza.File,
+                MIMEType = createPizza.MIMEType
             };
             _repository.Write(pizza);
             _unitOfWork.SaveChanges();

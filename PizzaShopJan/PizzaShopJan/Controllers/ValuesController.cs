@@ -21,14 +21,15 @@ namespace PizzaShopJan.Controllers
             _logger = logger;
         }
         // GET api/values
-        public IEnumerable<Ingredient> Get()
+        [Route("ingredients")]
+        public IEnumerable<Ingredient> GetIngredients()
         {
             return _logger.Ingredients();
         }
 
         // GET api/values/5
         [Route("pizzas")]
-        public IEnumerable<Pizza> Get(int id)
+        public IEnumerable<Pizza> GetPizza(int id)
         {
             List<UploadRequestViewModel> models = new List<UploadRequestViewModel>();
             List<Guid> IdIngredients = new List<Guid>();
@@ -52,7 +53,7 @@ namespace PizzaShopJan.Controllers
         {
             MemoryStream file = new MemoryStream();
             CopyStream(model.File.InputStream, file);
-            var createPizza = new CreatePizza() { Name = model.Name, Ingredients = model.Ingredients, File = file.ToArray() };
+            var createPizza = new CreatePizza() { Name = model.Name, Ingredients = model.Ingredients, File = file.ToArray(), MIMEType = model.File.ContentType };
             _logger.Write(createPizza);
         }
 
