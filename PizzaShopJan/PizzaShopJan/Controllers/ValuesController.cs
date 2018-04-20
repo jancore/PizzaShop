@@ -22,14 +22,14 @@ namespace PizzaShopJan.Controllers
         }
         // GET api/values
         [Route("ingredients")]
-        public IEnumerable<Ingredient> GetIngredients()
+        public IEnumerable<object> GetIngredients()
         {
             return _logger.Ingredients();
         }
 
         // GET api/values/5
         [Route("pizzas")]
-        public IEnumerable<Pizza> GetPizza(int id)
+        public IEnumerable<Pizza> GetPizza()
         {
             List<UploadRequestViewModel> models = new List<UploadRequestViewModel>();
             List<Guid> IdIngredients = new List<Guid>();
@@ -43,8 +43,15 @@ namespace PizzaShopJan.Controllers
                     IdIngredients.Add(ingredient.Id);
                     TotalCost += ingredient.Cost;
                 }
+                TotalCost += 5;
                 //models.Add(new UploadRequestViewModel() { Name = pizza.Name, Ingredients = IdIngredients, File = new MemoryStream(pizza.File) });
             }
+            return _logger.Pizzas();
+        }
+
+        [Route("pizzas/id")]
+        public IEnumerable<Pizza> GetPizza(int id)
+        {
             return _logger.Pizzas();
         }
 
