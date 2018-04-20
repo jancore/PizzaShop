@@ -3,7 +3,7 @@ import { BaseService } from '../../baseservice';
 
 export class PizzaService extends BaseService {
     constructor(http, resolveUrl) {
-        super(http, resolveUrl, 'api/values','pizzas');
+        super(http, resolveUrl, 'pizzas/add','pizzas');
     }
 
     get(id) {
@@ -16,16 +16,7 @@ export class PizzaService extends BaseService {
             super.getSecondRoute()
         );
     }
-    create(pizza) {
-        // in the development database (json-server)
-        // we do not store the images
-        /*if(pizza.img) delete pizza.img;
-        return this.http.post(
-            super.getRoute(),
-            pizza
-        );
-        */
-        
+    create(pizza) {        
         return this.http({
             method: 'POST',
             // set content-type to undefined so it is automatically selected

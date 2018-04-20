@@ -86,7 +86,7 @@ namespace Dominio
     {
         void Write(CreatePizza createPizza);
         List<object> Ingredients();
-        List<Pizza> Pizzas();
+        List<object> Pizzas();
     }
 
     public class Logger : ILogger
@@ -128,7 +128,7 @@ namespace Dominio
             return _repository.GetIngredients();
         }
 
-        public List<Pizza> Pizzas()
+        public List<object> Pizzas()
         {
             return _repository.GetPizzas();
         }
@@ -181,7 +181,7 @@ namespace Dominio
         void Write(Pizza pizza);
         Ingredient Find(Guid IdIngrediente);
         List<object> GetIngredients();
-        List<Pizza> GetPizzas();
+        List<object> GetPizzas();
     }
 
     public class Repository : IRepository
@@ -216,13 +216,23 @@ namespace Dominio
             return ingredientes;
         }
 
-        public List<Pizza> GetPizzas()
+        public List<object> GetPizzas()
         {
-            List<Pizza> pizzas = new List<Pizza>();
+            List<object> pizzas = new List<object>();
             var set = _repositoryPizza.IDbSet(typeof(Pizza));
-            foreach (var pizza in set)
+            Decimal totalCost;
+            foreach (Pizza pizza in set)
             {
-                pizzas.Add((Pizza) pizza);
+                totalCost = 5m;
+                foreach(var ingrediente in pizza.Ingredients)
+                {
+                    totalCost += ingrediente.Cost;
+                }
+                pizzas.Add(new { Name = pizza.Name,
+                                Ingredients = pizza.Ingredients,
+                                File = pizza.File,
+                                MIME = pizza.MIMEType,
+                                TotalCost = totalCost});
             }
             return pizzas;
         }

@@ -90861,7 +90861,7 @@ var PizzaService = function (_BaseService) {
 
     function PizzaService(http, resolveUrl) {
         classCallCheck(this, PizzaService);
-        return possibleConstructorReturn(this, (PizzaService.__proto__ || Object.getPrototypeOf(PizzaService)).call(this, http, resolveUrl, 'api/values', 'pizzas'));
+        return possibleConstructorReturn(this, (PizzaService.__proto__ || Object.getPrototypeOf(PizzaService)).call(this, http, resolveUrl, 'pizzas/add', 'pizzas'));
     }
 
     createClass(PizzaService, [{
@@ -90877,15 +90877,6 @@ var PizzaService = function (_BaseService) {
     }, {
         key: 'create',
         value: function create(pizza) {
-            // in the development database (json-server)
-            // we do not store the images
-            /*if(pizza.img) delete pizza.img;
-            return this.http.post(
-                super.getRoute(),
-                pizza
-            );
-            */
-
             return this.http({
                 method: 'POST',
                 // set content-type to undefined so it is automatically selected
@@ -91064,7 +91055,7 @@ var IngredientService = function (_BaseService) {
 
     function IngredientService(http, resolveUrl) {
         classCallCheck(this, IngredientService);
-        return possibleConstructorReturn(this, (IngredientService.__proto__ || Object.getPrototypeOf(IngredientService)).call(this, http, resolveUrl, 'api/values', ''));
+        return possibleConstructorReturn(this, (IngredientService.__proto__ || Object.getPrototypeOf(IngredientService)).call(this, http, resolveUrl, 'ingredients', ''));
     }
 
     createClass(IngredientService, [{

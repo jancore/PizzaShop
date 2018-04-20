@@ -31,21 +31,7 @@ namespace PizzaShopJan.Controllers
         [Route("pizzas")]
         public IEnumerable<Pizza> GetPizza()
         {
-            List<UploadRequestViewModel> models = new List<UploadRequestViewModel>();
-            List<Guid> IdIngredients = new List<Guid>();
-            Decimal TotalCost;
             var pizzas = _logger.Pizzas();
-            foreach(var pizza in pizzas)
-            {
-                TotalCost = 0m;
-                foreach(var ingredient in pizza.Ingredients)
-                {
-                    IdIngredients.Add(ingredient.Id);
-                    TotalCost += ingredient.Cost;
-                }
-                TotalCost += 5;
-                //models.Add(new UploadRequestViewModel() { Name = pizza.Name, Ingredients = IdIngredients, File = new MemoryStream(pizza.File) });
-            }
             return _logger.Pizzas();
         }
 
@@ -55,7 +41,8 @@ namespace PizzaShopJan.Controllers
             return _logger.Pizzas();
         }
 
-        // POST api/values        
+        // POST api/values   
+        [Route("pizzas/add")]
         public void Post([FromBody]UploadRequestViewModel model)
         {
             MemoryStream file = new MemoryStream();
