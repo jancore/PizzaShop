@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaShopJan", "PizzaShopJa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura", "Infraestructura\Infraestructura.csproj", "{8513BC47-723E-4212-8603-E56812397D9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EDB1B3B-6D73-4B65-BA58-13CB9E1414EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8513BC47-723E-4212-8603-E56812397D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8513BC47-723E-4212-8603-E56812397D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8513BC47-723E-4212-8603-E56812397D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8513BC47-723E-4212-8603-E56812397D9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

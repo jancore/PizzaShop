@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 using Autofac;
 using Autofac.Integration.WebApi;
 using System.Reflection;
-using Dominio;
+using Infraestructura;
 using PizzaShopJan.Formatters;
 
 namespace PizzaShopJan

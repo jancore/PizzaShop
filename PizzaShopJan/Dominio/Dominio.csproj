@@ -54,36 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201804161112514_InitialCreate.cs" />
-    <Compile Include="Migrations\201804161112514_InitialCreate.Designer.cs">
-      <DependentUpon>201804161112514_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804181238184_AddImage.cs" />
-    <Compile Include="Migrations\201804181238184_AddImage.Designer.cs">
-      <DependentUpon>201804181238184_AddImage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804200809581_Add_MIME.cs" />
-    <Compile Include="Migrations\201804200809581_Add_MIME.Designer.cs">
-      <DependentUpon>201804200809581_Add_MIME.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Dominio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804161112514_InitialCreate.resx">
-      <DependentUpon>201804161112514_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804181238184_AddImage.resx">
-      <DependentUpon>201804181238184_AddImage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804200809581_Add_MIME.resx">
-      <DependentUpon>201804200809581_Add_MIME.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

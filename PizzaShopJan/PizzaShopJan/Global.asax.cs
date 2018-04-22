@@ -1,4 +1,4 @@
-﻿using Dominio;
+﻿using Infraestructura;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

@@ -351,6 +351,10 @@
       <Project>{1edb1b3b-6d73-4b65-ba58-13cb9e1414ef}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infraestructura\Infraestructura.csproj">
+      <Project>{8513bc47-723e-4212-8603-e56812397d9f}</Project>
+      <Name>Infraestructura</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804130856294_InitialCreate.resx">
