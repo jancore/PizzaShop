@@ -27,8 +27,7 @@ namespace PizzaShopJan.Controllers
         {
             return _logger.Ingredients();
         }
-
-        // GET api/values/5
+        
         [Route("pizzas")]
         public IEnumerable<object> GetPizza()
         {
@@ -45,11 +44,21 @@ namespace PizzaShopJan.Controllers
             return pizzasDTO;
         }
 
-        /*[Route("pizzas/id")]
-        public IEnumerable<Pizza> GetPizza(int id)
+        [Route("pizzas/{id}")]
+        public HttpResponseMessage GetPizzaImage(Guid id)
         {
-            return _logger.Pizzas();
-        }*/
+            var pizza = _logger.Pizza(id);
+            var type = pizza.GetType();
+            var properties = type.GetProperties();
+            byte[] image = (byte[]) properties[3].GetValue(pizza);
+            string MIMEstr = properties[4].GetValue(pizza).ToString();
+
+            MemoryStream image_ms = new MemoryStream(image);
+            HttpResponseMessage image_response = new HttpResponseMessage(HttpStatusCode.OK);
+            image_response.Content = new StreamContent(image_ms);
+            image_response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(MIMEstr);
+            return image_response;
+        }
 
         // POST api/values   
         [Route("pizzas/add")]
