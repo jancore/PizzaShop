@@ -43,6 +43,7 @@ namespace Infraestructura
         void Write(CreatePizza createPizza);
         List<object> Ingredients();
         List<object> Pizzas();
+        object Pizza(Guid IdPizza);
     }
 
     public class Logger : ILogger
@@ -65,7 +66,7 @@ namespace Infraestructura
             List<Ingredient> ingredients = new List<Ingredient>();
             foreach (var IdIngredient in createPizza.Ingredients)
             {
-                ingredients.Add(_repository.Find(IdIngredient));
+                ingredients.Add(_repository.FindIngredient(IdIngredient));
             }
             var pizza = new Pizza()
             {
@@ -87,6 +88,11 @@ namespace Infraestructura
         public List<object> Pizzas()
         {
             return _repository.GetPizzas();
+        }
+
+        public object Pizza(Guid IdPizza)
+        {
+            return _repository.GetPizza(IdPizza);
         }
     }
 
@@ -141,7 +147,8 @@ namespace Infraestructura
     public interface IRepository
     {
         void Write(Pizza pizza);
-        Ingredient Find(Guid IdIngrediente);
+        Ingredient FindIngredient(Guid IdIngrediente);
+        object GetPizza(Guid IdPizza);
         List<object> GetIngredients();
         List<object> GetPizzas();
     }
@@ -161,7 +168,7 @@ namespace Infraestructura
 
         }
 
-        public Ingredient Find(Guid IdIngrediente)
+        public Ingredient FindIngredient(Guid IdIngrediente)
         {
             var set = _repositoryPizza.IDbSet(typeof(Ingredient));
             var ingrediente = (Ingredient)set.Find(IdIngrediente);
@@ -196,6 +203,21 @@ namespace Infraestructura
                 });
             }
             return pizzas;
+        }
+
+        public object GetPizza(Guid IdPizza)
+        {
+            var set = _repositoryPizza.IDbSet(typeof(Pizza));
+            var pizza = (Pizza)set.Find(IdPizza);
+            return new
+            {
+                Id = pizza.Id,
+                Name = pizza.Name,
+                Ingredients = pizza.GetIngredients(),
+                File = pizza.File,
+                MIME = pizza.MIMEType,
+                TotalCost = pizza.TotalCost()
+            };
         }
     }
 }
