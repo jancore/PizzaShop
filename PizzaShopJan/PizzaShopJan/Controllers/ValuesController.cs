@@ -40,7 +40,7 @@ namespace PizzaShopJan.Controllers
                 var type = pizza.GetType();
                 var properties = type.GetProperties();
                 url = HttpContext.Current.Request.Url + "/" + properties[0].GetValue(pizza).ToString(); 
-                pizzasDTO.Add(new { Name = properties[1].GetValue(pizza), Ingredients = properties[2].GetValue(pizza), URL = url});
+                pizzasDTO.Add(new { Name = properties[1].GetValue(pizza), Ingredients = properties[2].GetValue(pizza), URL = url, Id = properties[0].GetValue(pizza) });
             }            
             return pizzasDTO;
         }
