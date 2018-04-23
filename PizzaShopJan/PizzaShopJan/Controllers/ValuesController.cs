@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Dominio;
 using Infraestructura;
@@ -38,7 +39,7 @@ namespace PizzaShopJan.Controllers
             {
                 var type = pizza.GetType();
                 var properties = type.GetProperties();
-                url = "pizzas/" + properties[0].GetValue(pizza).ToString(); 
+                url = HttpContext.Current.Request.Url + "/pizzas/" + properties[0].GetValue(pizza).ToString(); 
                 pizzasDTO.Add(new { Name = properties[1].GetValue(pizza), Ingredients = properties[2].GetValue(pizza), URL = url});
             }            
             return pizzasDTO;
