@@ -7,7 +7,7 @@ export class PizzaDetailsCtrl {
         this.commentService = commentService;
         this.id = this.state.params && this.state.params.id
         this.name = null;
-        this.File = null;
+        this.URL = null;
         this.ingredients = null;
         this.comments = null;
        
@@ -23,8 +23,8 @@ export class PizzaDetailsCtrl {
             .then(response => {
                 let data = response.data;
                 _this.name = data.name;
-                _this.File = data.File;
                 _this.ingredients = data.ingredients;
+                _this.URL = data.URL;
                 _this.comments = data.comments;
             });
     }

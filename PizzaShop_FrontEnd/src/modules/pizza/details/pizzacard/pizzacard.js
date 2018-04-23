@@ -5,7 +5,7 @@ export const ilPizzaCard = {
   template: html,
   bindings:{
     name:"@",
-    img:"@"
+    URL:"@"
   }
 
 }

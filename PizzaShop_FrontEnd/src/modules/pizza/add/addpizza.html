@@ -6,18 +6,16 @@
                 <input required type="string" name="name" ng-model="$ctrl.pizza.name" />
                 <div ng-messages="pizzaForm.name.$error" md-auto-hide="false">
                     <div ng-message="required">
-                        You've got to put a name!
+                        El nombre es requerido.
                     </div>
                 </div>
             </md-input-container>
             <md-input-container>
-                <label>Ingredients:</label>
+                <label>Ingredientes:</label>
                 <il-ingredient-selector pizza="$ctrl.pizza"> </il-ingredient-selector>
             </md-input-container>
         </div>
         <il-img-uploader pizza="$ctrl.pizza"></il-img-uploader>
-        <div>
-            <md-button class="md-primary" type="submit">Submit</md-button>
-        </div>
+        <md-button class="md-primary" type="submit">Confirmar</md-button>
     </form>
 </md-content>
