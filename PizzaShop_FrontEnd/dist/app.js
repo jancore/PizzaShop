@@ -90619,13 +90619,13 @@ var ilPizzaList = {
 };
 App.component('ilPizzaList', ilPizzaList);
 
-var html$1 = "<md-card class=\"pizza-card\">\r\n    <img ng-src=\"{{$ctrl.img}}\" class=\"md-card-image\">\r\n    <md-card-title>\r\n        <md-card-title-text>\r\n            <span class=\"md-headline\" style=\"text-align: center\">{{ $ctrl.name | capitalize }}</span>\r\n        </md-card-title-text>\r\n    </md-card-title>\r\n</md-card>";
+var html$1 = "<md-card class=\"pizza-card\">\r\n    <img ng-src=\"{{$ctrl.File}}\" class=\"md-card-image\">\r\n    <md-card-title>\r\n        <md-card-title-text>\r\n            <span class=\"md-headline\" style=\"text-align: center\">{{ $ctrl.name | capitalize }}</span>\r\n        </md-card-title-text>\r\n    </md-card-title>\r\n</md-card>";
 
 var ilPizzaCard = {
   template: html$1,
   bindings: {
     name: "@",
-    img: "@"
+    File: "@"
   }
 
 };
@@ -90672,7 +90672,7 @@ var PizzaDetailsCtrl = function () {
         this.commentService = commentService;
         this.id = this.state.params && this.state.params.id;
         this.name = null;
-        this.img = null;
+        this.File = null;
         this.ingredients = null;
         this.comments = null;
 
@@ -90690,7 +90690,7 @@ var PizzaDetailsCtrl = function () {
             this.pizzaService.get(this.id).then(function (response) {
                 var data = response.data;
                 _this.name = data.name;
-                _this.img = data.img;
+                _this.File = data.File;
                 _this.ingredients = data.ingredients;
                 _this.comments = data.comments;
             });
